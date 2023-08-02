@@ -1,0 +1,15 @@
+apiVersion: conversion.haarchri.io/v1beta1
+kind: TestConversion
+metadata:
+  name: test-conversion-beta
+  namespace: crossplane-system
+spec:
+  hostPort: "localhost:8080"
+---
+apiVersion: conversion.haarchri.io/v1beta1
+kind: TestConversion
+metadata:
+  name: test-conversion-gamma
+  namespace: crossplane-system
+spec:
+  hostPort: "haarchri.io:9090"

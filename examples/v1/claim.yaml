@@ -1,0 +1,8 @@
+apiVersion: conversion.haarchri.io/v1
+kind: TestConversion
+metadata:
+  name: test-conversion
+  namespace: crossplane-system
+spec:
+  host: "localhost"
+  port: "8080"

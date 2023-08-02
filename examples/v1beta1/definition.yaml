@@ -1,0 +1,28 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xtestconversion.conversion.haarchri.io
+spec:
+  group: conversion.haarchri.io
+  names:
+    kind: XTestConversion
+    plural: xtestconversion
+  claimNames:
+    kind: TestConversion
+    plural: testconversions
+  versions:
+  - name: v1beta1
+    referenceable: true
+    served: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            description: "The OpenAPIV3Schema of this Composite Resource Definition."
+            properties:
+              hostPort:
+                type: string
+            required:
+              - hostPort

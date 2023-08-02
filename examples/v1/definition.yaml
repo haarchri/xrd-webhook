@@ -1,0 +1,60 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xtestconversion.conversion.haarchri.io
+spec:
+  conversion:
+    strategy: Webhook
+    webhook:
+      conversionReviewVersions: ["v1","v1beta1"]
+      clientConfig:
+        service:
+          namespace: crossplane-system
+          name: crd-conversion-webhook
+          path: /crdconvert
+  # https://github.com/crossplane/crossplane/pull/4310
+  metadata:
+    annotations:
+      # https://cert-manager.io/docs/concepts/ca-injector/
+      cert-manager.io/inject-apiserver-ca: "true"
+  group: conversion.haarchri.io
+  names:
+    kind: XTestConversion
+    plural: xtestconversion
+  claimNames:
+    kind: TestConversion
+    plural: testconversions
+  versions:
+  - name: v1
+    referenceable: true
+    served: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            description: "The OpenAPIV3Schema of this Composite Resource Definition."
+            properties:
+              host:
+                type: string
+              port:
+                type: string
+            required:
+              - host
+              - port
+  - name: v1beta1
+    served: true
+    referenceable: false
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            description: "The OpenAPIV3Schema of this Composite Resource Definition."
+            properties:
+              hostPort:
+                type: string
+            required:
+              - hostPort
